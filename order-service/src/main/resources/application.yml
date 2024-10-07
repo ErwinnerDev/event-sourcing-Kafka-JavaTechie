@@ -3,7 +3,9 @@ spring:
     mongodb:
       host: localhost
       port: 27017
-      database: javatechie
+      retryWrites: true
+      database: logevent
+      authentication-database: admin
 
 
   kafka:

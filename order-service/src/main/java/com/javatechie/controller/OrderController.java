@@ -3,11 +3,13 @@ package com.javatechie.controller;
 import com.javatechie.dto.request.OrderRequest;
 import com.javatechie.dto.response.OrderResponse;
 import com.javatechie.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -22,6 +24,7 @@ public class OrderController {
             OrderResponse orderResponse = orderService.placeAnOrder(orderRequest);
             return new ResponseEntity<>(orderResponse, HttpStatus.CREATED);
         } catch (Exception e) {
+            log.error("error {}, causa {}",e.getMessage(), e.getCause());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
